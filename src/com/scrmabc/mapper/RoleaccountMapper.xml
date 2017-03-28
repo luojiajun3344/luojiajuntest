@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.scrmabc.mapper.RoleaccountMapper">
+<cache/>
+<resultMap id="roleaccountResultMap" type="Roleaccount"> 
+<id property="roleaccount_id" column="roleaccount_id" /> 
+                        <result property="account_id" column="ACCOUNT_ID"/> 
+                        <result property="role_id" column="ROLE_ID"/> 
+                           
+
+
+</resultMap> 
+	<select id="getList" parameterType="Roleaccount"
+		resultType="list" resultMap="roleaccountResultMap">
+		select * from roleaccount 
+	</select>
+
+	<select id="roleaccountAll" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="roleaccountResultMap">
+		select * from roleaccount a
+		
+	</select>
+<select id="countAll" parameterType="com.core.util.page.PageSelect" resultType="_int" >
+		select count(*) from roleaccount a
+		
+	</select>
+	<!-- roleaccountResultMap是roleaccount-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="Roleaccount" resultType="Roleaccount"
+		resultMap="roleaccountResultMap">
+		<![CDATA[
+			select * from roleaccount where roleaccount_id = #{roleaccountId}
+        ]]>
+	</select>
+
+<select id="getById" parameterType="java.lang.Integer" resultType="Roleaccount"
+		resultMap="roleaccountResultMap">
+		<![CDATA[
+			select * from roleaccount where roleaccount_id =#{id} 
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="roleaccount_id"
+		parameterType="Roleaccount">
+		insert into roleaccount
+         <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="@Ognl@isNotBlank(account_id)" >
+        ACCOUNT_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(role_id)" >
+        ROLE_ID,
+                 </if>
+         </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," > 
+		<if test="@Ognl@isNotBlank(account_id)" >
+                    #{account_id},
+         </if>
+		<if test="@Ognl@isNotBlank(role_id)" >
+                    #{role_id},
+         </if>
+         </trim>
+		<selectKey resultType="int" keyProperty="roleaccount_id">
+   SELECT LAST_INSERT_ID()
+  </selectKey>
+	</insert>
+
+
+	<update id="edit" parameterType="Roleaccount">
+		update roleaccount set
+		<trim  suffixOverrides=",">
+		
+		    <if test="@Ognl@isNotBlank(account_id)" >
+                       ACCOUNT_ID=#{account_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(role_id)" >
+                       ROLE_ID=#{role_id}
+                        
+                       </if>
+         </trim>
+		where roleaccount_id = #{roleaccountId}
+	</update>
+
+	<delete id="remove" parameterType="Roleaccount">
+		delete from roleaccount where
+		roleaccount_id = #{roleaccountId }
+	</delete>
+
+   <delete id="removeById" parameterType="java.lang.Integer">
+		delete from roleaccount where
+		roleaccount_id = #{id}
+	</delete>
+	<select id="getByPage" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="roleaccountResultMap">
+		SELECT
+		*
+		FROM
+		roleaccount a
+			<where>
+					<if test="@Ognl@isNotBlank(filter.account_id)">
+		
+			 a.ACCOUNT_ID=#{filter.account_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.role_id)">
+		
+			 a.ROLE_ID=#{filter.role_id}
+			 			 
+		</if>
+		</where>
+	      	 <if test="@Ognl@isNotBlank(filter.sortname)">
+		<if test="@Ognl@isNotBlank(filter.sortorder)">
+		 order by #{filter.sortname} #{filter.sortorder}
+		</if>
+      </if>	
+		LIMIT #{offset},#{pageSize} 
+	</select>
+
+</mapper>

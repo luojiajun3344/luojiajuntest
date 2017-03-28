@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<package name="admin" extends="struts-default">
+<action name="Message_*" class="messageManageAction" method="{1}"></action>
+<action name="Organization_*" class="organizationManageAction" method="{1}"></action>
+<action name="Account_*" class="accountManageAction" method="{1}"></action>
+<action name="Depart_*" class="departManageAction" method="{1}"></action>
+<action name="Module_*" class="moduleManageAction" method="{1}"></action>
+<action name="Monitorvehicle_*" class="monitorvehicleManageAction" method="{1}"></action>
+<action name="Role_*" class="roleManageAction" method="{1}"></action>
+<action name="Roleaccount_*" class="roleaccountManageAction" method="{1}"></action>
+<action name="Rolemodule_*" class="rolemoduleManageAction" method="{1}"></action>
+<action name="Vehicle_*" class="vehicleManageAction" method="{1}"></action>
+
+</package>
+</struts>    

@@ -1,0 +1,13 @@
+{ 
+
+       "success": true,
+       
+       "total":       3,
+		"resultList":[
+		{messageId:"1",content:"helloword",plateNumber:"opTiasdf",opTime:"2010-01-01",person:"asddf",state:"未读"},
+		{messageId:"2",content:"hellowod",plateNumber:"opTasdf",opTime:"2010-01-01",person:"asdfsdf",state:"未读"},
+		{messageId:"3",content:"hellord",plateNumber:"opTisdf",opTime:"2010-01-01",person:"asfasdf",state:"未读"}
+		
+		
+		]
+	}

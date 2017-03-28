@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.LZwebgis.mapper.AccountMapper2">
+<cache/>
+<resultMap id="accountResultMap" type="Account"> 
+<id property="accountId" column="account_id" /> 
+                        <result property="account_id" column="ACCOUNT_ID"/> 
+                        <result property="depart_id" column="DEPART_ID"/> 
+                        <result property="loginname" column="LOGINNAME"/> 
+                        <result property="password" column="PASSWORD"/> 
+                        <result property="username" column="USERNAME"/> 
+                        <result property="tel_phone_number" column="TEL_PHONE_NUMBER"/> 
+                        <result property="mobile_phone_number" column="MOBILE_PHONE_NUMBER"/> 
+                        <result property="email" column="EMAIL"/> 
+                        <result property="police_no" column="POLICE_NO"/> 
+                        <result property="id_number" column="ID_NUMBER"/> 
+                        <result property="isonline" column="ISONLINE"/> 
+                        <result property="aproval_status" column="APROVAL_STATUS"/> 
+                        <result property="police_type" column="POLICE_TYPE"/> 
+                        <result property="last_logintime" column="LAST_LOGINTIME"/> 
+                        <result property="stamp" column="STAMP"/> 
+                           
+
+
+</resultMap> 
+	<select id="getList" parameterType="Account"
+		resultType="list" resultMap="accountResultMap">
+		select * from T_A_ACCOUNT 
+	</select>
+
+	<select id="accountAll" parameterType="PageSelect" resultType="list" resultMap="accountResultMap">
+		select * from T_A_ACCOUNT a
+		
+	</select>
+<select id="countAll" parameterType="PageSelect" resultType="_int" >
+		select count(*) from T_A_ACCOUNT a
+			<where>
+					<if test="@Ognl@isNotBlank(filter.account_id)">
+		
+			 a.ACCOUNT_ID=#{filter.account_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.depart_id)">
+		
+			 a.DEPART_ID=#{filter.depart_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.loginname)">
+		
+			 a.LOGINNAME=#{filter.loginname}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.password)">
+		
+			 a.PASSWORD=#{filter.password}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.username)">
+		
+			 a.USERNAME=#{filter.username}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.tel_phone_number)">
+		
+			 a.TEL_PHONE_NUMBER=#{filter.tel_phone_number}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.mobile_phone_number)">
+		
+			 a.MOBILE_PHONE_NUMBER=#{filter.mobile_phone_number}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.email)">
+		
+			 a.EMAIL=#{filter.email}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.police_no)">
+		
+			 a.POLICE_NO=#{filter.police_no}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.id_number)">
+		
+			 a.ID_NUMBER=#{filter.id_number}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.isonline)">
+		
+			 a.ISONLINE=#{filter.isonline}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.aproval_status)">
+		
+			 a.APROVAL_STATUS=#{filter.aproval_status}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.police_type)">
+		
+			 a.POLICE_TYPE=#{filter.police_type}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.last_logintime)">
+		
+			 a.LAST_LOGINTIME=#{filter.last_logintime}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.stamp)">
+		
+			 a.STAMP=#{filter.stamp}
+			 			 
+		</if>
+		</where>
+	</select>
+	<!-- accountResultMap是account-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="Account" resultType="Account"
+		resultMap="accountResultMap">
+		<![CDATA[
+			select * from T_A_ACCOUNT where account_id = #{accountId}
+        ]]>
+	</select>
+
+<select id="getById" parameterType="java.lang.Integer" resultType="Account"
+		resultMap="accountResultMap">
+		<![CDATA[
+			select * from T_A_ACCOUNT where account_id =#{id} 
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" 
+		parameterType="Account">
+		insert into T_A_ACCOUNT
+         <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="@Ognl@isNotBlank(account_id)" >
+        ACCOUNT_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(depart_id)" >
+        DEPART_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(loginname)" >
+        LOGINNAME,
+                 </if>
+		<if test="@Ognl@isNotBlank(password)" >
+        PASSWORD,
+                 </if>
+		<if test="@Ognl@isNotBlank(username)" >
+        USERNAME,
+                 </if>
+		<if test="@Ognl@isNotBlank(tel_phone_number)" >
+        TEL_PHONE_NUMBER,
+                 </if>
+		<if test="@Ognl@isNotBlank(mobile_phone_number)" >
+        MOBILE_PHONE_NUMBER,
+                 </if>
+		<if test="@Ognl@isNotBlank(email)" >
+        EMAIL,
+                 </if>
+		<if test="@Ognl@isNotBlank(police_no)" >
+        POLICE_NO,
+                 </if>
+		<if test="@Ognl@isNotBlank(id_number)" >
+        ID_NUMBER,
+                 </if>
+		<if test="@Ognl@isNotBlank(isonline)" >
+        ISONLINE,
+                 </if>
+		<if test="@Ognl@isNotBlank(aproval_status)" >
+        APROVAL_STATUS,
+                 </if>
+		<if test="@Ognl@isNotBlank(police_type)" >
+        POLICE_TYPE,
+                 </if>
+		<if test="@Ognl@isNotBlank(last_logintime)" >
+        LAST_LOGINTIME,
+                 </if>
+		<if test="@Ognl@isNotBlank(stamp)" >
+        STAMP,
+                 </if>
+         </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," > 
+		<if test="@Ognl@isNotBlank(account_id)" >
+                    #{account_id},
+         </if>
+		<if test="@Ognl@isNotBlank(depart_id)" >
+                    #{depart_id},
+         </if>
+		<if test="@Ognl@isNotBlank(loginname)" >
+                    #{loginname},
+         </if>
+		<if test="@Ognl@isNotBlank(password)" >
+                    #{password},
+         </if>
+		<if test="@Ognl@isNotBlank(username)" >
+                    #{username},
+         </if>
+		<if test="@Ognl@isNotBlank(tel_phone_number)" >
+                    #{tel_phone_number},
+         </if>
+		<if test="@Ognl@isNotBlank(mobile_phone_number)" >
+                    #{mobile_phone_number},
+         </if>
+		<if test="@Ognl@isNotBlank(email)" >
+                    #{email},
+         </if>
+		<if test="@Ognl@isNotBlank(police_no)" >
+                    #{police_no},
+         </if>
+		<if test="@Ognl@isNotBlank(id_number)" >
+                    #{id_number},
+         </if>
+		<if test="@Ognl@isNotBlank(isonline)" >
+                    #{isonline},
+         </if>
+		<if test="@Ognl@isNotBlank(aproval_status)" >
+                    #{aproval_status},
+         </if>
+		<if test="@Ognl@isNotBlank(police_type)" >
+                    #{police_type},
+         </if>
+		<if test="@Ognl@isNotBlank(last_logintime)" >
+                    #{last_logintime},
+         </if>
+		<if test="@Ognl@isNotBlank(stamp)" >
+                    #{stamp},
+         </if>
+         </trim>
+		
+	</insert>
+
+
+	<update id="edit" parameterType="Account">
+		update T_A_ACCOUNT set
+		<trim  suffixOverrides=",">
+		
+		    <if test="@Ognl@isNotBlank(account_id)" >
+                       ACCOUNT_ID=#{account_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(depart_id)" >
+                       DEPART_ID=#{depart_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(loginname)" >
+                       LOGINNAME=#{loginname}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(password)" >
+                       PASSWORD=#{password}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(username)" >
+                       USERNAME=#{username}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(tel_phone_number)" >
+                       TEL_PHONE_NUMBER=#{tel_phone_number}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(mobile_phone_number)" >
+                       MOBILE_PHONE_NUMBER=#{mobile_phone_number}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(email)" >
+                       EMAIL=#{email}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(police_no)" >
+                       POLICE_NO=#{police_no}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(id_number)" >
+                       ID_NUMBER=#{id_number}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(isonline)" >
+                       ISONLINE=#{isonline}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(aproval_status)" >
+                       APROVAL_STATUS=#{aproval_status}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(police_type)" >
+                       POLICE_TYPE=#{police_type}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(last_logintime)" >
+                       LAST_LOGINTIME=#{last_logintime}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(stamp)" >
+                       STAMP=#{stamp}
+                        
+                       </if>
+         </trim>
+		where account_id = #{accountId}
+	</update>
+
+	<delete id="remove" parameterType="Account">
+		delete from T_A_ACCOUNT where
+		account_id = #{accountId }
+	</delete>
+
+   <delete id="removeById" parameterType="java.lang.Integer">
+		delete from T_A_ACCOUNT where
+		account_id = #{id}
+	</delete>
+	<select id="getByPage" parameterType="PageSelect" resultType="list" resultMap="accountResultMap">
+			select * from (select t1.*,rownum rn from (SELECT * FROM
+		    T_A_ACCOUNT a 
+				<where>
+		<if test="@Ognl@isNotBlank(filter.account_id)">
+			  and  a.ACCOUNT_ID=#{filter.account_id}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.depart_id)">
+			  and  a.DEPART_ID=#{filter.depart_id}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.loginname)">
+			  and  a.LOGINNAME=#{filter.loginname}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.password)">
+			  and  a.PASSWORD=#{filter.password}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.username)">
+			  and  a.USERNAME=#{filter.username}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.tel_phone_number)">
+			  and  a.TEL_PHONE_NUMBER=#{filter.tel_phone_number}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.mobile_phone_number)">
+			  and  a.MOBILE_PHONE_NUMBER=#{filter.mobile_phone_number}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.email)">
+			  and  a.EMAIL=#{filter.email}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.police_no)">
+			  and  a.POLICE_NO=#{filter.police_no}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.id_number)">
+			  and  a.ID_NUMBER=#{filter.id_number}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.isonline)">
+			  and  a.ISONLINE=#{filter.isonline}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.aproval_status)">
+			  and  a.APROVAL_STATUS=#{filter.aproval_status}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.police_type)">
+			  and  a.POLICE_TYPE=#{filter.police_type}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.last_logintime)">
+			  and  a.LAST_LOGINTIME=#{filter.last_logintime}
+			 			
+		</if>
+		<if test="@Ognl@isNotBlank(filter.stamp)">
+			   a.STAMP=#{filter.stamp}
+			 			
+		</if>
+		</where>) t1  <![CDATA[
+       where rownum<=#{offset}+#{pageSize} 
+      ]]>) t2<![CDATA[where t2.rn>=#{offset}]]>
+	
+	</select>
+
+</mapper>

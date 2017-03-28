@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.scrmabc.mapper.RoleMapper">
+<cache/>
+<resultMap id="roleResultMap" type="Role"> 
+<id property="role_id" column="role_id" /> 
+                        <result property="role_id" column="ROLE_ID"/> 
+                        <result property="role_name" column="ROLE_NAME"/> 
+                        <result property="role_type" column="ROLE_TYPE"/> 
+                        <result property="super_role_id" column="SUPER_ROLE_ID"/> 
+                        <result property="account_id" column="ACCOUNT_ID"/> 
+                        <result property="create_time" column="CREATE_TIME"/> 
+                        <result property="remarks" column="REMARKS"/> 
+                        <result property="ispublic" column="ISPUBLIC"/> 
+                           
+
+
+</resultMap> 
+	<select id="getList" parameterType="Role"
+		resultType="list" resultMap="roleResultMap">
+		select * from role 
+	</select>
+
+	<select id="roleAll" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="roleResultMap">
+		select * from role a
+		
+	</select>
+<select id="countAll" parameterType="com.core.util.page.PageSelect" resultType="_int" >
+		select count(*) from role a
+		
+	</select>
+	<!-- roleResultMap是role-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="Role" resultType="Role"
+		resultMap="roleResultMap">
+		<![CDATA[
+			select * from role where role_id = #{roleId}
+        ]]>
+	</select>
+
+<select id="getById" parameterType="java.lang.Integer" resultType="Role"
+		resultMap="roleResultMap">
+		<![CDATA[
+			select * from role where role_id =#{id} 
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="role_id"
+		parameterType="Role">
+		insert into role
+         <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="@Ognl@isNotBlank(role_id)" >
+        ROLE_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(role_name)" >
+        ROLE_NAME,
+                 </if>
+		<if test="@Ognl@isNotBlank(role_type)" >
+        ROLE_TYPE,
+                 </if>
+		<if test="@Ognl@isNotBlank(super_role_id)" >
+        SUPER_ROLE_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(account_id)" >
+        ACCOUNT_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(create_time)" >
+        CREATE_TIME,
+                 </if>
+		<if test="@Ognl@isNotBlank(remarks)" >
+        REMARKS,
+                 </if>
+		<if test="@Ognl@isNotBlank(ispublic)" >
+        ISPUBLIC,
+                 </if>
+         </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," > 
+		<if test="@Ognl@isNotBlank(role_id)" >
+                    #{role_id},
+         </if>
+		<if test="@Ognl@isNotBlank(role_name)" >
+                    #{role_name},
+         </if>
+		<if test="@Ognl@isNotBlank(role_type)" >
+                    #{role_type},
+         </if>
+		<if test="@Ognl@isNotBlank(super_role_id)" >
+                    #{super_role_id},
+         </if>
+		<if test="@Ognl@isNotBlank(account_id)" >
+                    #{account_id},
+         </if>
+		<if test="@Ognl@isNotBlank(create_time)" >
+                    #{create_time},
+         </if>
+		<if test="@Ognl@isNotBlank(remarks)" >
+                    #{remarks},
+         </if>
+		<if test="@Ognl@isNotBlank(ispublic)" >
+                    #{ispublic},
+         </if>
+         </trim>
+		<selectKey resultType="int" keyProperty="role_id">
+   SELECT LAST_INSERT_ID()
+  </selectKey>
+	</insert>
+
+
+	<update id="edit" parameterType="Role">
+		update role set
+		<trim  suffixOverrides=",">
+		
+		    <if test="@Ognl@isNotBlank(role_id)" >
+                       ROLE_ID=#{role_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(role_name)" >
+                       ROLE_NAME=#{role_name}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(role_type)" >
+                       ROLE_TYPE=#{role_type}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(super_role_id)" >
+                       SUPER_ROLE_ID=#{super_role_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(account_id)" >
+                       ACCOUNT_ID=#{account_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(create_time)" >
+                       CREATE_TIME=#{create_time}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(remarks)" >
+                       REMARKS=#{remarks}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(ispublic)" >
+                       ISPUBLIC=#{ispublic}
+                        
+                       </if>
+         </trim>
+		where role_id = #{roleId}
+	</update>
+
+	<delete id="remove" parameterType="Role">
+		delete from role where
+		role_id = #{roleId }
+	</delete>
+
+   <delete id="removeById" parameterType="java.lang.Integer">
+		delete from role where
+		role_id = #{id}
+	</delete>
+	<select id="getByPage" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="roleResultMap">
+		SELECT
+		*
+		FROM
+		role a
+			<where>
+					<if test="@Ognl@isNotBlank(filter.role_id)">
+		
+			 a.ROLE_ID=#{filter.role_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.role_name)">
+		
+			 a.ROLE_NAME=#{filter.role_name}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.role_type)">
+		
+			 a.ROLE_TYPE=#{filter.role_type}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.super_role_id)">
+		
+			 a.SUPER_ROLE_ID=#{filter.super_role_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.account_id)">
+		
+			 a.ACCOUNT_ID=#{filter.account_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.create_time)">
+		
+			 a.CREATE_TIME=#{filter.create_time}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.remarks)">
+		
+			 a.REMARKS=#{filter.remarks}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.ispublic)">
+		
+			 a.ISPUBLIC=#{filter.ispublic}
+			 			 
+		</if>
+		</where>
+	      	 <if test="@Ognl@isNotBlank(filter.sortname)">
+		<if test="@Ognl@isNotBlank(filter.sortorder)">
+		 order by #{filter.sortname} #{filter.sortorder}
+		</if>
+      </if>	
+		LIMIT #{offset},#{pageSize} 
+	</select>
+
+</mapper>

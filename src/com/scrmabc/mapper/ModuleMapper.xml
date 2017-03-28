@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.scrmabc.mapper.ModuleMapper">
+<cache/>
+<resultMap id="moduleResultMap" type="Module"> 
+<id property="module_id" column="module_id" /> 
+                        <result property="module_id" column="MODULE_ID"/> 
+                        <result property="module_name" column="MODULE_NAME"/> 
+                        <result property="parent_module_id" column="PARENT_MODULE_ID"/> 
+                        <result property="control1" column="CONTROL1"/> 
+                        <result property="control2" column="CONTROL2"/> 
+                        <result property="control3" column="CONTROL3"/> 
+                        <result property="control4" column="CONTROL4"/> 
+                        <result property="remarks" column="REMARKS"/> 
+                        <result property="module_type" column="MODULE_TYPE"/> 
+                           
+
+
+</resultMap> 
+	<select id="getList" parameterType="Module"
+		resultType="list" resultMap="moduleResultMap">
+		select * from module 
+	</select>
+
+	<select id="moduleAll" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="moduleResultMap">
+		select * from module a
+		
+	</select>
+<select id="countAll" parameterType="com.core.util.page.PageSelect" resultType="_int" >
+		select count(*) from module a
+		
+	</select>
+	<!-- moduleResultMap是module-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="Module" resultType="Module"
+		resultMap="moduleResultMap">
+		<![CDATA[
+			select * from module where module_id = #{moduleId}
+        ]]>
+	</select>
+
+<select id="getById" parameterType="java.lang.Integer" resultType="Module"
+		resultMap="moduleResultMap">
+		<![CDATA[
+			select * from module where module_id =#{id} 
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="module_id"
+		parameterType="Module">
+		insert into module
+         <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="@Ognl@isNotBlank(module_id)" >
+        MODULE_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(module_name)" >
+        MODULE_NAME,
+                 </if>
+		<if test="@Ognl@isNotBlank(parent_module_id)" >
+        PARENT_MODULE_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(control1)" >
+        CONTROL1,
+                 </if>
+		<if test="@Ognl@isNotBlank(control2)" >
+        CONTROL2,
+                 </if>
+		<if test="@Ognl@isNotBlank(control3)" >
+        CONTROL3,
+                 </if>
+		<if test="@Ognl@isNotBlank(control4)" >
+        CONTROL4,
+                 </if>
+		<if test="@Ognl@isNotBlank(remarks)" >
+        REMARKS,
+                 </if>
+		<if test="@Ognl@isNotBlank(module_type)" >
+        MODULE_TYPE,
+                 </if>
+         </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," > 
+		<if test="@Ognl@isNotBlank(module_id)" >
+                    #{module_id},
+         </if>
+		<if test="@Ognl@isNotBlank(module_name)" >
+                    #{module_name},
+         </if>
+		<if test="@Ognl@isNotBlank(parent_module_id)" >
+                    #{parent_module_id},
+         </if>
+		<if test="@Ognl@isNotBlank(control1)" >
+                    #{control1},
+         </if>
+		<if test="@Ognl@isNotBlank(control2)" >
+                    #{control2},
+         </if>
+		<if test="@Ognl@isNotBlank(control3)" >
+                    #{control3},
+         </if>
+		<if test="@Ognl@isNotBlank(control4)" >
+                    #{control4},
+         </if>
+		<if test="@Ognl@isNotBlank(remarks)" >
+                    #{remarks},
+         </if>
+		<if test="@Ognl@isNotBlank(module_type)" >
+                    #{module_type},
+         </if>
+         </trim>
+		<selectKey resultType="int" keyProperty="module_id">
+   SELECT LAST_INSERT_ID()
+  </selectKey>
+	</insert>
+
+
+	<update id="edit" parameterType="Module">
+		update module set
+		<trim  suffixOverrides=",">
+		
+		    <if test="@Ognl@isNotBlank(module_id)" >
+                       MODULE_ID=#{module_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(module_name)" >
+                       MODULE_NAME=#{module_name}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(parent_module_id)" >
+                       PARENT_MODULE_ID=#{parent_module_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(control1)" >
+                       CONTROL1=#{control1}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(control2)" >
+                       CONTROL2=#{control2}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(control3)" >
+                       CONTROL3=#{control3}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(control4)" >
+                       CONTROL4=#{control4}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(remarks)" >
+                       REMARKS=#{remarks}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(module_type)" >
+                       MODULE_TYPE=#{module_type}
+                        
+                       </if>
+         </trim>
+		where module_id = #{moduleId}
+	</update>
+
+	<delete id="remove" parameterType="Module">
+		delete from module where
+		module_id = #{moduleId }
+	</delete>
+
+   <delete id="removeById" parameterType="java.lang.Integer">
+		delete from module where
+		module_id = #{id}
+	</delete>
+	<select id="getByPage" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="moduleResultMap">
+		SELECT
+		*
+		FROM
+		module a
+			<where>
+					<if test="@Ognl@isNotBlank(filter.module_id)">
+		
+			 a.MODULE_ID=#{filter.module_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.module_name)">
+		
+			 a.MODULE_NAME=#{filter.module_name}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.parent_module_id)">
+		
+			 a.PARENT_MODULE_ID=#{filter.parent_module_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.control1)">
+		
+			 a.CONTROL1=#{filter.control1}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.control2)">
+		
+			 a.CONTROL2=#{filter.control2}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.control3)">
+		
+			 a.CONTROL3=#{filter.control3}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.control4)">
+		
+			 a.CONTROL4=#{filter.control4}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.remarks)">
+		
+			 a.REMARKS=#{filter.remarks}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.module_type)">
+		
+			 a.MODULE_TYPE=#{filter.module_type}
+			 			 
+		</if>
+		</where>
+	      	 <if test="@Ognl@isNotBlank(filter.sortname)">
+		<if test="@Ognl@isNotBlank(filter.sortorder)">
+		 order by #{filter.sortname} #{filter.sortorder}
+		</if>
+      </if>	
+		LIMIT #{offset},#{pageSize} 
+	</select>
+
+</mapper>

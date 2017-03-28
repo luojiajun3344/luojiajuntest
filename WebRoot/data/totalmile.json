@@ -1,0 +1,19 @@
+{ 
+
+       "success": true,
+       
+       "total":       1,
+		"resultList":[{
+		vehicleId: 'vehicleId'
+	,
+		plateNumber : '甘F0000'
+	,
+		departName : '庆阳市'
+	,
+		vehicleModel: '大车'
+	,
+		vehicleType : '警车'
+	,
+		totalmile : '3000'
+	}]
+	}

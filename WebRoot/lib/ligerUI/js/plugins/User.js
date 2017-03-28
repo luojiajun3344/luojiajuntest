@@ -1,0 +1,4 @@
+var data={"Rows":[{"sex":"1","mobilenumber":"18711175799","mail":"xxd@x.com","nickname":"SA","lastsoftversion":"","imei":"","headimage":"images/icons/neutral.png","phonetype":"","address":"","regversion":"2","mastermemberno":"","mid":"","other":{"status":"1"}}]};
+
+
+/*,"registertime":{"time":1323939283000,"minutes":54,"seconds":43,"hours":16,"month":11,"timezoneOffset":-480,"year":111,"day":4,"date":15},"password":"3780b9af58bdf8eda51f1af6561c9775","lastlogintime":null,"mobilenumber":"18711175799","age":0,"ismaster":0,"grade":0,"phonenumber":"100008","otherInfo":{"id":"060b9375-0f87-4372-84ef-db73d90bd66f","updatepwdfailtime":null,"phonenumber":"","updateserpwdtime":null,"status":"0","randompwdtime":null,"updatepwdcount":0,"loginfailcount":0,"onlinestatus":"0","accountunlocktime":null,"updateserpwdcount":0,"randompwd":""}*/

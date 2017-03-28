@@ -1,0 +1,31 @@
+{
+       "success": true,
+       "total":       1,
+		"resultList":[{ 
+    vehicleId: 'vehicleId'
+,
+		plateNumber : '甘A0003'
+	,
+		departName : '庆阳市'
+	,
+		speed : '60km/h'
+	,
+		vehicleType : '警车'
+	,
+		unitNumber : '6281027'
+	,
+		warnType : '越界'
+	,
+		warnTime : '2012-06-20 14:20'
+	,
+		postion : '庆阳市公安局路旁'
+	,
+		direction : '东北'
+	,
+		vehiclestate : '行驶中'
+	,
+	warnNumber:'3'
+	}
+		
+		]
+	}

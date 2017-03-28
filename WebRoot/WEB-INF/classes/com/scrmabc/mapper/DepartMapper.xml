@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.scrmabc.mapper.DepartMapper">
+<cache/>
+<resultMap id="departResultMap" type="Depart"> 
+<id property="depart_id" column="depart_id" /> 
+                        <result property="depart_id" column="DEPART_ID"/> 
+                        <result property="depart_no" column="DEPART_NO"/> 
+                        <result property="depart_name" column="DEPART_NAME"/> 
+                        <result property="super_depart_id" column="SUPER_DEPART_ID"/> 
+                        <result property="manager_name" column="MANAGER_NAME"/> 
+                        <result property="manager_phone" column="MANAGER_PHONE"/> 
+                        <result property="email" column="EMAIL"/> 
+                        <result property="account_id" column="ACCOUNT_ID"/> 
+                        <result property="receive_person_name" column="RECEIVE_PERSON_NAME"/> 
+                        <result property="receive_person_phone" column="RECEIVE_PERSON_PHONE"/> 
+                        <result property="depart_type" column="DEPART_TYPE"/> 
+                        <result property="is_delete" column="IS_DELETE"/> 
+                        <result property="remark" column="REMARK"/> 
+                        <result property="stamp" column="STAMP"/> 
+                        <result property="depart_sequence" column="DEPART_SEQUENCE"/> 
+                           
+
+
+</resultMap> 
+	<select id="getList" parameterType="Depart"
+		resultType="list" resultMap="departResultMap">
+		select * from depart 
+	</select>
+
+	<select id="departAll" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="departResultMap">
+		select * from depart a
+		
+	</select>
+<select id="countAll" parameterType="com.core.util.page.PageSelect" resultType="_int" >
+		select count(*) from depart a
+		
+	</select>
+	<!-- departResultMap是depart-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="Depart" resultType="Depart"
+		resultMap="departResultMap">
+		<![CDATA[
+			select * from depart where depart_id = #{departId}
+        ]]>
+	</select>
+
+<select id="getById" parameterType="java.lang.Integer" resultType="Depart"
+		resultMap="departResultMap">
+		<![CDATA[
+			select * from depart where depart_id =#{id} 
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="depart_id"
+		parameterType="Depart">
+		insert into depart
+         <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="@Ognl@isNotBlank(depart_id)" >
+        DEPART_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(depart_no)" >
+        DEPART_NO,
+                 </if>
+		<if test="@Ognl@isNotBlank(depart_name)" >
+        DEPART_NAME,
+                 </if>
+		<if test="@Ognl@isNotBlank(super_depart_id)" >
+        SUPER_DEPART_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(manager_name)" >
+        MANAGER_NAME,
+                 </if>
+		<if test="@Ognl@isNotBlank(manager_phone)" >
+        MANAGER_PHONE,
+                 </if>
+		<if test="@Ognl@isNotBlank(email)" >
+        EMAIL,
+                 </if>
+		<if test="@Ognl@isNotBlank(account_id)" >
+        ACCOUNT_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(receive_person_name)" >
+        RECEIVE_PERSON_NAME,
+                 </if>
+		<if test="@Ognl@isNotBlank(receive_person_phone)" >
+        RECEIVE_PERSON_PHONE,
+                 </if>
+		<if test="@Ognl@isNotBlank(depart_type)" >
+        DEPART_TYPE,
+                 </if>
+		<if test="@Ognl@isNotBlank(is_delete)" >
+        IS_DELETE,
+                 </if>
+		<if test="@Ognl@isNotBlank(remark)" >
+        REMARK,
+                 </if>
+		<if test="@Ognl@isNotBlank(stamp)" >
+        STAMP,
+                 </if>
+		<if test="@Ognl@isNotBlank(depart_sequence)" >
+        DEPART_SEQUENCE,
+                 </if>
+         </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," > 
+		<if test="@Ognl@isNotBlank(depart_id)" >
+                    #{depart_id},
+         </if>
+		<if test="@Ognl@isNotBlank(depart_no)" >
+                    #{depart_no},
+         </if>
+		<if test="@Ognl@isNotBlank(depart_name)" >
+                    #{depart_name},
+         </if>
+		<if test="@Ognl@isNotBlank(super_depart_id)" >
+                    #{super_depart_id},
+         </if>
+		<if test="@Ognl@isNotBlank(manager_name)" >
+                    #{manager_name},
+         </if>
+		<if test="@Ognl@isNotBlank(manager_phone)" >
+                    #{manager_phone},
+         </if>
+		<if test="@Ognl@isNotBlank(email)" >
+                    #{email},
+         </if>
+		<if test="@Ognl@isNotBlank(account_id)" >
+                    #{account_id},
+         </if>
+		<if test="@Ognl@isNotBlank(receive_person_name)" >
+                    #{receive_person_name},
+         </if>
+		<if test="@Ognl@isNotBlank(receive_person_phone)" >
+                    #{receive_person_phone},
+         </if>
+		<if test="@Ognl@isNotBlank(depart_type)" >
+                    #{depart_type},
+         </if>
+		<if test="@Ognl@isNotBlank(is_delete)" >
+                    #{is_delete},
+         </if>
+		<if test="@Ognl@isNotBlank(remark)" >
+                    #{remark},
+         </if>
+		<if test="@Ognl@isNotBlank(stamp)" >
+                    #{stamp},
+         </if>
+		<if test="@Ognl@isNotBlank(depart_sequence)" >
+                    #{depart_sequence},
+         </if>
+         </trim>
+		<selectKey resultType="int" keyProperty="depart_id">
+   SELECT LAST_INSERT_ID()
+  </selectKey>
+	</insert>
+
+
+	<update id="edit" parameterType="Depart">
+		update depart set
+		<trim  suffixOverrides=",">
+		
+		    <if test="@Ognl@isNotBlank(depart_id)" >
+                       DEPART_ID=#{depart_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(depart_no)" >
+                       DEPART_NO=#{depart_no}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(depart_name)" >
+                       DEPART_NAME=#{depart_name}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(super_depart_id)" >
+                       SUPER_DEPART_ID=#{super_depart_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(manager_name)" >
+                       MANAGER_NAME=#{manager_name}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(manager_phone)" >
+                       MANAGER_PHONE=#{manager_phone}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(email)" >
+                       EMAIL=#{email}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(account_id)" >
+                       ACCOUNT_ID=#{account_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(receive_person_name)" >
+                       RECEIVE_PERSON_NAME=#{receive_person_name}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(receive_person_phone)" >
+                       RECEIVE_PERSON_PHONE=#{receive_person_phone}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(depart_type)" >
+                       DEPART_TYPE=#{depart_type}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(is_delete)" >
+                       IS_DELETE=#{is_delete}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(remark)" >
+                       REMARK=#{remark}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(stamp)" >
+                       STAMP=#{stamp}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(depart_sequence)" >
+                       DEPART_SEQUENCE=#{depart_sequence}
+                        
+                       </if>
+         </trim>
+		where depart_id = #{departId}
+	</update>
+
+	<delete id="remove" parameterType="Depart">
+		delete from depart where
+		depart_id = #{departId }
+	</delete>
+
+   <delete id="removeById" parameterType="java.lang.Integer">
+		delete from depart where
+		depart_id = #{id}
+	</delete>
+	<select id="getByPage" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="departResultMap">
+		SELECT
+		*
+		FROM
+		depart a
+			<where>
+					<if test="@Ognl@isNotBlank(filter.depart_id)">
+		
+			 a.DEPART_ID=#{filter.depart_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.depart_no)">
+		
+			 a.DEPART_NO=#{filter.depart_no}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.depart_name)">
+		
+			 a.DEPART_NAME=#{filter.depart_name}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.super_depart_id)">
+		
+			 a.SUPER_DEPART_ID=#{filter.super_depart_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.manager_name)">
+		
+			 a.MANAGER_NAME=#{filter.manager_name}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.manager_phone)">
+		
+			 a.MANAGER_PHONE=#{filter.manager_phone}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.email)">
+		
+			 a.EMAIL=#{filter.email}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.account_id)">
+		
+			 a.ACCOUNT_ID=#{filter.account_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.receive_person_name)">
+		
+			 a.RECEIVE_PERSON_NAME=#{filter.receive_person_name}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.receive_person_phone)">
+		
+			 a.RECEIVE_PERSON_PHONE=#{filter.receive_person_phone}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.depart_type)">
+		
+			 a.DEPART_TYPE=#{filter.depart_type}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.is_delete)">
+		
+			 a.IS_DELETE=#{filter.is_delete}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.remark)">
+		
+			 a.REMARK=#{filter.remark}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.stamp)">
+		
+			 a.STAMP=#{filter.stamp}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.depart_sequence)">
+		
+			 a.DEPART_SEQUENCE=#{filter.depart_sequence}
+			 			 
+		</if>
+		</where>
+	      	 <if test="@Ognl@isNotBlank(filter.sortname)">
+		<if test="@Ognl@isNotBlank(filter.sortorder)">
+		 order by #{filter.sortname} #{filter.sortorder}
+		</if>
+      </if>	
+		LIMIT #{offset},#{pageSize} 
+	</select>
+
+</mapper>

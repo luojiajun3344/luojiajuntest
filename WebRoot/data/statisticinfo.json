@@ -1,0 +1,9 @@
+{ 
+
+       "success": true,
+       "total":       2,
+		"resultList":[{organization:'高丽市', cartotal:'45',onlinenumber:'23',unlinenumber:'22',onlinerate:'51%'},
+		{organization:'庆阳市', cartotal:'40',onlinenumber:'33',unlinenumber:'7',onlinerate:'82%'}
+		
+		]
+	}

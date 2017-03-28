@@ -1,0 +1,20 @@
+{ 
+
+       "success": true,
+       
+       "total":       3,
+		"resultList":[
+		{vehicleId:"1",state:"在线",Type:'警车',organization:'庆阳市西峰区分局',plateNumber:"甘M0038警",onlineTime:"2010-01-01",level:'3个月'},
+		{vehicleId:"2",state:"在线",Type:'警车',organization:'庆阳市西峰区分局',plateNumber:"甘M0018警",onlineTime:"2010-01-01",level:'1个月'},
+		{vehicleId:"2",state:"在线",Type:'警车',organization:'庆阳市西峰区分局',plateNumber:"甘M0028警",onlineTime:"2010-01-01",level:'1个月'},
+		{vehicleId:"2",state:"在线",Type:'警车',organization:'庆阳市西峰区分局',plateNumber:"甘M0048警",onlineTime:"2010-01-01",level:'1个月'},
+		{vehicleId:"2",state:"在线",Type:'乘务车',organization:'庆阳市西峰区分局',plateNumber:"甘M0058警",onlineTime:"2010-01-01",level:'1个月'},
+		{vehicleId:"2",state:"在线",Type:'警车',organization:'庆阳市西峰区分局',plateNumber:"甘M0068警",onlineTime:"2010-01-01",level:'1个月'},
+		{vehicleId:"2",state:"在线",Type:'乘务车',organization:'庆阳市西峰区分局',plateNumber:"甘M0078警",onlineTime:"2010-01-01",level:'1个月'},
+		{vehicleId:"2",state:"在线",Type:'乘务车',organization:'庆阳市西峰区分局',plateNumber:"甘M018警",onlineTime:"2010-01-01",level:'1个月'},
+		{vehicleId:"2",state:"在线",Type:'警车',organization:'庆阳市西峰区分局',plateNumber:"甘M0018警",onlineTime:"2010-01-01",level:'1个月'},
+		{vehicleId:"3",state:"离线",Type:'警车',organization:'庆阳市西峰区分局',plateNumber:"甘M0528警",onlineTime:"2010-01-01",level:'12个月'},
+		{vehicleId:"3",state:"离线",Type:'乘务车',organization:'庆阳市西峰区分局',plateNumber:"甘M6028警",onlineTime:"2010-01-01",level:'2个月'},
+			{vehicleId:"3",state:"离线",Type:'警车',organization:'庆阳市西峰区分局',plateNumber:"甘M8028警",onlineTime:"2010-01-01",level:'2个月'}
+		]
+	}

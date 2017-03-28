@@ -1,0 +1,45 @@
+.icon-user {
+    background-image: url(../images/user.png) !important;
+}
+
+.icon-user-add {
+    background-image: url(../images/user_add.gif) !important;
+}
+
+.icon-modify {
+    background-image: url(../images/modify.gif) !important;
+}
+.icon-save {
+    background-image: url(../images/save.gif) !important;
+}
+.icon-piechart {
+    background-image: url(../images/piechart.png) !important;
+}
+
+.icon-reset {
+    background-image: url(../images/stop.png) !important;
+}
+.icon-search {
+    background-image: url(../images/search.png) !important;
+}
+.icon-grid {
+    background-image: url(../images/grid.png) !important;
+}
+
+.icon-add {
+    background-image: url(../images/add.png) !important;
+}
+
+.icon-delete {
+    background-image: url(../images/delete.png) !important;
+}
+.icon-detail {
+    background-image: url(../images/detail.png) !important;
+}
+.x-tree-node-icon {
+    background-image: url("../images/organization.png") !important;
+}
+.x-tree-node-leaf .x-tree-node-icon {
+    background-image: url("../images/car.png") !important;
+}
+

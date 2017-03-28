@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.scrmabc.mapper.MessageMapper">
+<cache/>
+<resultMap id="messageResultMap" type="Message"> 
+<id property="message_id" column="message_id" /> 
+                        <result property="message_id" column="message_id"/> 
+                        <result property="content" column="CONTENT"/> 
+                        <result property="admin_id" column="admin_id"/> 
+                        <result property="vehicle_id" column="vehicle_id"/> 
+                        <result property="optime" column="optime"/> 
+                        <result property="type" column="type"/> 
+                           
+
+
+</resultMap> 
+	<select id="getList" parameterType="Message"
+		resultType="list" resultMap="messageResultMap">
+		select * from message 
+	</select>
+
+	<select id="messageAll" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="messageResultMap">
+		select * from message a
+		
+	</select>
+<select id="countAll" parameterType="com.core.util.page.PageSelect" resultType="_int" >
+		select count(*) from message a
+		
+	</select>
+	<!-- messageResultMap是message-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="Message" resultType="Message"
+		resultMap="messageResultMap">
+		<![CDATA[
+			select * from message where message_id = #{messageId}
+        ]]>
+	</select>
+
+<select id="getById" parameterType="java.lang.Integer" resultType="Message"
+		resultMap="messageResultMap">
+		<![CDATA[
+			select * from message where message_id =#{id} 
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="message_id"
+		parameterType="Message">
+		insert into message
+         <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="@Ognl@isNotBlank(message_id)" >
+        message_id,
+                 </if>
+		<if test="@Ognl@isNotBlank(content)" >
+        CONTENT,
+                 </if>
+		<if test="@Ognl@isNotBlank(admin_id)" >
+        admin_id,
+                 </if>
+		<if test="@Ognl@isNotBlank(vehicle_id)" >
+        vehicle_id,
+                 </if>
+		<if test="@Ognl@isNotBlank(optime)" >
+        optime,
+                 </if>
+		<if test="@Ognl@isNotBlank(type)" >
+        type,
+                 </if>
+         </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," > 
+		<if test="@Ognl@isNotBlank(message_id)" >
+                    #{message_id},
+         </if>
+		<if test="@Ognl@isNotBlank(content)" >
+                    #{content},
+         </if>
+		<if test="@Ognl@isNotBlank(admin_id)" >
+                    #{admin_id},
+         </if>
+		<if test="@Ognl@isNotBlank(vehicle_id)" >
+                    #{vehicle_id},
+         </if>
+		<if test="@Ognl@isNotBlank(optime)" >
+                    #{optime},
+         </if>
+		<if test="@Ognl@isNotBlank(type)" >
+                    #{type},
+         </if>
+         </trim>
+		<selectKey resultType="int" keyProperty="message_id">
+   SELECT LAST_INSERT_ID()
+  </selectKey>
+	</insert>
+
+
+	<update id="edit" parameterType="Message">
+		update message set
+		<trim  suffixOverrides=",">
+		
+		    <if test="@Ognl@isNotBlank(message_id)" >
+                       message_id=#{message_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(content)" >
+                       CONTENT=#{content}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(admin_id)" >
+                       admin_id=#{admin_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(vehicle_id)" >
+                       vehicle_id=#{vehicle_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(optime)" >
+                       optime=#{optime}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(type)" >
+                       type=#{type}
+                        
+                       </if>
+         </trim>
+		where message_id = #{messageId}
+	</update>
+
+	<delete id="remove" parameterType="Message">
+		delete from message where
+		message_id = #{messageId }
+	</delete>
+
+   <delete id="removeById" parameterType="java.lang.Integer">
+		delete from message where
+		message_id = #{id}
+	</delete>
+	<select id="getByPage" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="messageResultMap">
+		SELECT
+		*
+		FROM
+		message a
+			<where>
+					<if test="@Ognl@isNotBlank(filter.message_id)">
+		
+			 a.message_id=#{filter.message_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.content)">
+		
+			 a.CONTENT=#{filter.content}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.admin_id)">
+		
+			 a.admin_id=#{filter.admin_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.vehicle_id)">
+		
+			 a.vehicle_id=#{filter.vehicle_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.optime)">
+		
+			 a.optime=#{filter.optime}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.type)">
+		
+			 a.type=#{filter.type}
+			 			 
+		</if>
+		</where>
+	      	 <if test="@Ognl@isNotBlank(filter.sortname)">
+		<if test="@Ognl@isNotBlank(filter.sortorder)">
+		 order by #{filter.sortname} #{filter.sortorder}
+		</if>
+      </if>	
+		LIMIT #{offset},#{pageSize} 
+	</select>
+
+</mapper>

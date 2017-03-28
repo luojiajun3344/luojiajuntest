@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.scrmabc.mapper.MonitorvehicleMapper">
+<cache/>
+<resultMap id="monitorvehicleResultMap" type="Monitorvehicle"> 
+<id property="monitorvehicle_id" column="monitorvehicle_id" /> 
+                        <result property="monitor_id" column="MONITOR_ID"/> 
+                        <result property="account_id" column="ACCOUNT_ID"/> 
+                        <result property="call_letter" column="CALL_LETTER"/> 
+                        <result property="position_mode" column="POSITION_MODE"/> 
+                        <result property="number_plate" column="NUMBER_PLATE"/> 
+                           
+
+
+</resultMap> 
+	<select id="getList" parameterType="Monitorvehicle"
+		resultType="list" resultMap="monitorvehicleResultMap">
+		select * from monitorvehicle 
+	</select>
+
+	<select id="monitorvehicleAll" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="monitorvehicleResultMap">
+		select * from monitorvehicle a
+		
+	</select>
+<select id="countAll" parameterType="com.core.util.page.PageSelect" resultType="_int" >
+		select count(*) from monitorvehicle a
+		
+	</select>
+	<!-- monitorvehicleResultMap是monitorvehicle-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="Monitorvehicle" resultType="Monitorvehicle"
+		resultMap="monitorvehicleResultMap">
+		<![CDATA[
+			select * from monitorvehicle where monitorvehicle_id = #{monitorvehicleId}
+        ]]>
+	</select>
+
+<select id="getById" parameterType="java.lang.Integer" resultType="Monitorvehicle"
+		resultMap="monitorvehicleResultMap">
+		<![CDATA[
+			select * from monitorvehicle where monitorvehicle_id =#{id} 
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="monitorvehicle_id"
+		parameterType="Monitorvehicle">
+		insert into monitorvehicle
+         <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="@Ognl@isNotBlank(monitor_id)" >
+        MONITOR_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(account_id)" >
+        ACCOUNT_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(call_letter)" >
+        CALL_LETTER,
+                 </if>
+		<if test="@Ognl@isNotBlank(position_mode)" >
+        POSITION_MODE,
+                 </if>
+		<if test="@Ognl@isNotBlank(number_plate)" >
+        NUMBER_PLATE,
+                 </if>
+         </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," > 
+		<if test="@Ognl@isNotBlank(monitor_id)" >
+                    #{monitor_id},
+         </if>
+		<if test="@Ognl@isNotBlank(account_id)" >
+                    #{account_id},
+         </if>
+		<if test="@Ognl@isNotBlank(call_letter)" >
+                    #{call_letter},
+         </if>
+		<if test="@Ognl@isNotBlank(position_mode)" >
+                    #{position_mode},
+         </if>
+		<if test="@Ognl@isNotBlank(number_plate)" >
+                    #{number_plate},
+         </if>
+         </trim>
+		<selectKey resultType="int" keyProperty="monitorvehicle_id">
+   SELECT LAST_INSERT_ID()
+  </selectKey>
+	</insert>
+
+
+	<update id="edit" parameterType="Monitorvehicle">
+		update monitorvehicle set
+		<trim  suffixOverrides=",">
+		
+		    <if test="@Ognl@isNotBlank(monitor_id)" >
+                       MONITOR_ID=#{monitor_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(account_id)" >
+                       ACCOUNT_ID=#{account_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(call_letter)" >
+                       CALL_LETTER=#{call_letter}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(position_mode)" >
+                       POSITION_MODE=#{position_mode}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(number_plate)" >
+                       NUMBER_PLATE=#{number_plate}
+                        
+                       </if>
+         </trim>
+		where monitorvehicle_id = #{monitorvehicleId}
+	</update>
+
+	<delete id="remove" parameterType="Monitorvehicle">
+		delete from monitorvehicle where
+		monitorvehicle_id = #{monitorvehicleId }
+	</delete>
+
+   <delete id="removeById" parameterType="java.lang.Integer">
+		delete from monitorvehicle where
+		monitorvehicle_id = #{id}
+	</delete>
+	<select id="getByPage" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="monitorvehicleResultMap">
+		SELECT
+		*
+		FROM
+		monitorvehicle a
+			<where>
+					<if test="@Ognl@isNotBlank(filter.monitor_id)">
+		
+			 a.MONITOR_ID=#{filter.monitor_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.account_id)">
+		
+			 a.ACCOUNT_ID=#{filter.account_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.call_letter)">
+		
+			 a.CALL_LETTER=#{filter.call_letter}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.position_mode)">
+		
+			 a.POSITION_MODE=#{filter.position_mode}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.number_plate)">
+		
+			 a.NUMBER_PLATE=#{filter.number_plate}
+			 			 
+		</if>
+		</where>
+	      	 <if test="@Ognl@isNotBlank(filter.sortname)">
+		<if test="@Ognl@isNotBlank(filter.sortorder)">
+		 order by #{filter.sortname} #{filter.sortorder}
+		</if>
+      </if>	
+		LIMIT #{offset},#{pageSize} 
+	</select>
+
+</mapper>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.scrmabc.mapper.VehicleMapper">
+<cache/>
+<resultMap id="vehicleResultMap" type="Vehicle"> 
+<id property="vehicle_id" column="vehicle_id" /> 
+                        <result property="vehicle_id" column="vehicle_id"/> 
+                        <result property="platenumber" column="plateNumber"/> 
+                        <result property="miletotal" column="miletotal"/> 
+                        <result property="oiltotal" column="oiltotal"/> 
+                        <result property="organization_id" column="organization_id"/> 
+                           
+
+
+</resultMap> 
+	<select id="getList" parameterType="Vehicle"
+		resultType="list" resultMap="vehicleResultMap">
+		select * from vehicle 
+	</select>
+
+	<select id="vehicleAll" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="vehicleResultMap">
+		select * from vehicle a
+		
+	</select>
+<select id="countAll" parameterType="com.core.util.page.PageSelect" resultType="_int" >
+		select count(*) from vehicle a
+		
+	</select>
+	<!-- vehicleResultMap是vehicle-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="Vehicle" resultType="Vehicle"
+		resultMap="vehicleResultMap">
+		<![CDATA[
+			select * from vehicle where vehicle_id = #{vehicleId}
+        ]]>
+	</select>
+
+<select id="getById" parameterType="java.lang.Integer" resultType="Vehicle"
+		resultMap="vehicleResultMap">
+		<![CDATA[
+			select * from vehicle where vehicle_id =#{id} 
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="vehicle_id"
+		parameterType="Vehicle">
+		insert into vehicle
+         <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="@Ognl@isNotBlank(vehicle_id)" >
+        vehicle_id,
+                 </if>
+		<if test="@Ognl@isNotBlank(platenumber)" >
+        plateNumber,
+                 </if>
+		<if test="@Ognl@isNotBlank(miletotal)" >
+        miletotal,
+                 </if>
+		<if test="@Ognl@isNotBlank(oiltotal)" >
+        oiltotal,
+                 </if>
+		<if test="@Ognl@isNotBlank(organization_id)" >
+        organization_id,
+                 </if>
+         </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," > 
+		<if test="@Ognl@isNotBlank(vehicle_id)" >
+                    #{vehicle_id},
+         </if>
+		<if test="@Ognl@isNotBlank(platenumber)" >
+                    #{platenumber},
+         </if>
+		<if test="@Ognl@isNotBlank(miletotal)" >
+                    #{miletotal},
+         </if>
+		<if test="@Ognl@isNotBlank(oiltotal)" >
+                    #{oiltotal},
+         </if>
+		<if test="@Ognl@isNotBlank(organization_id)" >
+                    #{organization_id},
+         </if>
+         </trim>
+		<selectKey resultType="int" keyProperty="vehicle_id">
+   SELECT LAST_INSERT_ID()
+  </selectKey>
+	</insert>
+
+
+	<update id="edit" parameterType="Vehicle">
+		update vehicle set
+		<trim  suffixOverrides=",">
+		
+		    <if test="@Ognl@isNotBlank(vehicle_id)" >
+                       vehicle_id=#{vehicle_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(platenumber)" >
+                       plateNumber=#{platenumber}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(miletotal)" >
+                       miletotal=#{miletotal}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(oiltotal)" >
+                       oiltotal=#{oiltotal}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(organization_id)" >
+                       organization_id=#{organization_id}
+                        
+                       </if>
+         </trim>
+		where vehicle_id = #{vehicleId}
+	</update>
+
+	<delete id="remove" parameterType="Vehicle">
+		delete from vehicle where
+		vehicle_id = #{vehicleId }
+	</delete>
+
+   <delete id="removeById" parameterType="java.lang.Integer">
+		delete from vehicle where
+		vehicle_id = #{id}
+	</delete>
+	<select id="getByPage" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="vehicleResultMap">
+		SELECT
+		*
+		FROM
+		vehicle a
+			<where>
+					<if test="@Ognl@isNotBlank(filter.vehicle_id)">
+		
+			 a.vehicle_id=#{filter.vehicle_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.platenumber)">
+		
+			 a.plateNumber=#{filter.platenumber}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.miletotal)">
+		
+			 a.miletotal=#{filter.miletotal}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.oiltotal)">
+		
+			 a.oiltotal=#{filter.oiltotal}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.organization_id)">
+		
+			 a.organization_id=#{filter.organization_id}
+			 			 
+		</if>
+		</where>
+	      	 <if test="@Ognl@isNotBlank(filter.sortname)">
+		<if test="@Ognl@isNotBlank(filter.sortorder)">
+		 order by #{filter.sortname} #{filter.sortorder}
+		</if>
+      </if>	
+		LIMIT #{offset},#{pageSize} 
+	</select>
+
+</mapper>

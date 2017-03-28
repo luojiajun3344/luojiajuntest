@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.scrmabc.mapper.RolemoduleMapper">
+<cache/>
+<resultMap id="rolemoduleResultMap" type="Rolemodule"> 
+<id property="rolemodule_id" column="rolemodule_id" /> 
+                        <result property="role_id" column="ROLE_ID"/> 
+                        <result property="module_id" column="MODULE_ID"/> 
+                           
+
+
+</resultMap> 
+	<select id="getList" parameterType="Rolemodule"
+		resultType="list" resultMap="rolemoduleResultMap">
+		select * from rolemodule 
+	</select>
+
+	<select id="rolemoduleAll" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="rolemoduleResultMap">
+		select * from rolemodule a
+		
+	</select>
+<select id="countAll" parameterType="com.core.util.page.PageSelect" resultType="_int" >
+		select count(*) from rolemodule a
+		
+	</select>
+	<!-- rolemoduleResultMap是rolemodule-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="Rolemodule" resultType="Rolemodule"
+		resultMap="rolemoduleResultMap">
+		<![CDATA[
+			select * from rolemodule where rolemodule_id = #{rolemoduleId}
+        ]]>
+	</select>
+
+<select id="getById" parameterType="java.lang.Integer" resultType="Rolemodule"
+		resultMap="rolemoduleResultMap">
+		<![CDATA[
+			select * from rolemodule where rolemodule_id =#{id} 
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="rolemodule_id"
+		parameterType="Rolemodule">
+		insert into rolemodule
+         <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="@Ognl@isNotBlank(role_id)" >
+        ROLE_ID,
+                 </if>
+		<if test="@Ognl@isNotBlank(module_id)" >
+        MODULE_ID,
+                 </if>
+         </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," > 
+		<if test="@Ognl@isNotBlank(role_id)" >
+                    #{role_id},
+         </if>
+		<if test="@Ognl@isNotBlank(module_id)" >
+                    #{module_id},
+         </if>
+         </trim>
+		<selectKey resultType="int" keyProperty="rolemodule_id">
+   SELECT LAST_INSERT_ID()
+  </selectKey>
+	</insert>
+
+
+	<update id="edit" parameterType="Rolemodule">
+		update rolemodule set
+		<trim  suffixOverrides=",">
+		
+		    <if test="@Ognl@isNotBlank(role_id)" >
+                       ROLE_ID=#{role_id}
+                        ,
+                       </if>
+		
+		    <if test="@Ognl@isNotBlank(module_id)" >
+                       MODULE_ID=#{module_id}
+                        
+                       </if>
+         </trim>
+		where rolemodule_id = #{rolemoduleId}
+	</update>
+
+	<delete id="remove" parameterType="Rolemodule">
+		delete from rolemodule where
+		rolemodule_id = #{rolemoduleId }
+	</delete>
+
+   <delete id="removeById" parameterType="java.lang.Integer">
+		delete from rolemodule where
+		rolemodule_id = #{id}
+	</delete>
+	<select id="getByPage" parameterType="com.core.util.page.PageSelect" resultType="list" resultMap="rolemoduleResultMap">
+		SELECT
+		*
+		FROM
+		rolemodule a
+			<where>
+					<if test="@Ognl@isNotBlank(filter.role_id)">
+		
+			 a.ROLE_ID=#{filter.role_id}
+			 			 and 
+		</if>
+					<if test="@Ognl@isNotBlank(filter.module_id)">
+		
+			 a.MODULE_ID=#{filter.module_id}
+			 			 
+		</if>
+		</where>
+	      	 <if test="@Ognl@isNotBlank(filter.sortname)">
+		<if test="@Ognl@isNotBlank(filter.sortorder)">
+		 order by #{filter.sortname} #{filter.sortorder}
+		</if>
+      </if>	
+		LIMIT #{offset},#{pageSize} 
+	</select>
+
+</mapper>

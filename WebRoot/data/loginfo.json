@@ -1,0 +1,9 @@
+{ 
+
+       "success": true,
+       "total":       2,
+		"resultList":[{logid:'1',adminname:'小罗',name:'罗',organization:'甘肃省公安厅',optime:'2012-12-12 12:12',type:'车辆',opcontent:'添加车辆'
+	},
+	{logid:'2',adminname:'小罗',name:'罗',organization:'甘肃省公安厅',optime:'2012-12-12 12:12',type:'普通',opcontent:'发送短信'
+	}]
+	}
