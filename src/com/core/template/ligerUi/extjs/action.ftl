@@ -12,7 +12,7 @@ import ${rootpackage}.service.${beanName}ManageService;
 import com.core.util.PrintLinger;
 @Scope("prototype")
 @Controller
-public class ${beanName}Controller extends BaseController {
+public class ${beanName}ManageAction extends ActionSupport {
     @Resource
 	private ${beanName} ${beanName?uncap_first};
 	@Resource
